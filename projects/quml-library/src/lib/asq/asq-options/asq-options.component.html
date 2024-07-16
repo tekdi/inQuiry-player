@@ -1,0 +1,19 @@
+<h5>Arrange sequence questions</h5>
+<ng-container *ngIf="layout === 'VERTICAL' || layout === 'DEFAULT'">
+  <div cdkDropList [cdkDropListData]="todo" class="asq-horizontal-list" (cdkDropListDropped)="drop($event)">
+    <div class="asq-horizontal-box" *ngFor="let item of todo" cdkDrag>
+      <div [innerHTML]="item"></div>
+      <quml-reorder></quml-reorder>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="layout === 'HORIZONTAL'">
+  <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let item of todo" cdkDrag>
+      <div class="drag-handle">
+        <quml-reorder></quml-reorder>
+      </div>
+      <div [innerHTML]="item"></div>
+    </div>
+  </div>
+</ng-container>
