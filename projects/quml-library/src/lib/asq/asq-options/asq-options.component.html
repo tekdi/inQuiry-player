@@ -1,19 +1,18 @@
-<h5>Arrange sequence questions</h5>
-<ng-container *ngIf="layout === 'VERTICAL' || layout === 'DEFAULT'">
-  <div cdkDropList [cdkDropListData]="todo" class="asq-horizontal-list" (cdkDropListDropped)="drop($event)">
-    <div class="asq-horizontal-box" *ngFor="let item of todo" cdkDrag>
-      <div [innerHTML]="item"></div>
+<ng-container *ngIf="optionsShuffled && (layout === 'VERTICAL' || layout === 'DEFAULT')">
+  <div cdkDropList [cdkDropListData]="shuffledOptions" class="asq-horizontal-list" (cdkDropListDropped)="onDrop($event)">
+    <div class="asq-horizontal-box" *ngFor="let option of shuffledOptions" cdkDrag>
+      <div [innerHTML]="option.label"></div>
       <quml-reorder></quml-reorder>
     </div>
   </div>
 </ng-container>
-<ng-container *ngIf="layout === 'HORIZONTAL'">
-  <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let item of todo" cdkDrag>
+<ng-container *ngIf="optionsShuffled && (layout === 'HORIZONTAL')">
+  <div cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="shuffledOptions" class="horizontal-list" (cdkDropListDropped)="onDrop($event)">
+    <div class="asq-vertical-box" *ngFor="let option of shuffledOptions" cdkDrag>
       <div class="drag-handle">
         <quml-reorder></quml-reorder>
       </div>
-      <div [innerHTML]="item"></div>
+      <div [innerHTML]="option.label"></div>
     </div>
   </div>
 </ng-container>

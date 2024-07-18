@@ -38,7 +38,7 @@
   object-fit: contain;
 }
 //horizontal layout css
-.example-list {
+.horizontal-list {
   display: flex;
   justify-content: space-between; 
   flex-wrap: nowrap; 
@@ -47,9 +47,9 @@
   box-sizing: border-box;
 }
 
-.example-box {
+.asq-vertical-box {
   flex: 0 1 25%; 
-    max-width: 25%;
+  max-width: 25%;
   position:relative;
   padding: 0px 15px;
   border: solid 1px #ccccccab;
@@ -67,19 +67,19 @@
   margin-top:2%;
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
-::ng-deep .example-box img
+::ng-deep .asq-vertical-box img
 {
   width: 70px;
   height: 70px;
   object-fit: contain;
 }
-::ng-deep .example-box p{
+::ng-deep .asq-vertical-box p{
 line-height: 20px;
 margin-top: 5px;
 margin-bottom: 5px;
 }
 
-.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+.horizontal-list.cdk-drop-list-dragging .asq-vertical-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 .centered-align{
@@ -95,18 +95,18 @@ height: 100vh;
   cursor: move;
 }
 @media screen and (max-width: 600px) {
-::ng-deep .example-box p {
+::ng-deep .asq-vertical-box p {
   line-height: 14px;
   margin-top: 5px;
   margin-bottom: 5px;
   font-size: 10px;
   padding: 7px;
 }
-.example-box{
+.asq-vertical-box{
   margin: 0% 1px 10px;
   padding:0px;
 }
-.example-list{
+.horizontal-list{
   padding:0px;
 }
 }
