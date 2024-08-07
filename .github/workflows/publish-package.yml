@@ -8,6 +8,13 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+      pull-request: write
+
     steps:
       - name: 📥 Checkout Code Repository
         uses: actions/checkout@v4
@@ -22,6 +29,10 @@ jobs:
 
       - name: 🛠️ Build Library
         run: npm run build-lib
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 🔍 Ensure jq is installed
         run: sudo apt-get install -y jq
@@ -45,9 +56,6 @@ jobs:
           else
             npm publish --access public
           fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 📜 Log Version Exists
         if: env.status == '200'
