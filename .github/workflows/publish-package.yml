@@ -19,8 +19,16 @@ jobs:
           node-version: '18'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Authenticate to npm
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTOMATION_TOKEN }}" > ~/.npmrc
+      - name: Install npm-cli-login
+        run: npm install -g npm-cli-login
+
+      - name: Login to npm
+        run: |
+          npm-cli-login -u ${{ secrets.NPM_USERNAME }} -p ${{ secrets.NPM_PASSWORD }} -e ${{ secrets.NPM_EMAIL }}
+        env:
+          NPM_USERNAME: ${{ secrets.NPM_USERNAME }}
+          NPM_PASSWORD: ${{ secrets.NPM_PASSWORD }}
+          NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
 
       - name: 📦 Install Dependencies
         run: npm install
