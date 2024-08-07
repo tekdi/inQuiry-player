@@ -19,15 +19,14 @@ jobs:
           node-version: '18'
           registry-url: 'https://registry.npmjs.org/'
 
+      - name: Debug NPM Token Secret
+        run: |
+          echo "NPM_TOKEN value is: '${{ secrets.NPM_TOKEN }}'"
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Authenticate to npm
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-
-      - name: Debug NPM Token
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}"
-          cat ~/.npmrc  # Verify the contents of .npmrc to ensure the token is written correctly
-        env:
-          NPM_AUTOMATION_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 📦 Install Dependencies
         run: npm install
