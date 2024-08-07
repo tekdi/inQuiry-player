@@ -9,11 +9,6 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: read
-      packages: write
-      id-token: write
-
     steps:
       - name: 📥 Checkout Code Repository
         uses: actions/checkout@v4
@@ -43,18 +38,14 @@ jobs:
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$NPM_REGISTRY/$PACKAGE_NAME/$PACKAGE_VERSION")
           echo "status=$STATUS" >> $GITHUB_ENV
 
-      - name: 🔧 Debug Environment Variables
-        run: env | grep NODE
-
-      - name: 🔑 Verify NPM Authentication
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          npm whoami
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: 🚢 Publish to NPM
         if: env.status != '200'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           cd dist/quml-library
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
@@ -62,8 +53,6 @@ jobs:
           else
             npm publish
           fi
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 📜 Log Version Exists
         if: env.status == '200'
