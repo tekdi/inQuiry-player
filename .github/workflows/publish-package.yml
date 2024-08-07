@@ -17,10 +17,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: 'https://registry.npmjs.org/'
 
       - name: Install npm-cli-login
         run: npm install -g npm-cli-login
+
+      - name: Debug Environment Variables
+        run: |
+          echo "NPM_USERNAME=${{ secrets.NPM_USERNAME }}"
+          echo "NPM_PASSWORD=${{ secrets.NPM_PASSWORD }}"
+          echo "NPM_EMAIL=${{ secrets.NPM_EMAIL }}"
+        env:
+          NPM_USERNAME: ${{ secrets.NPM_USERNAME }}
+          NPM_PASSWORD: ${{ secrets.NPM_PASSWORD }}
+          NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
 
       - name: Login to npm
         run: |
