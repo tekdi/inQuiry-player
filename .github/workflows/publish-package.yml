@@ -9,12 +9,6 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: read
-      packages: write
-      id-token: write
-      pull-requests: write
-
     steps:
       - name: 📥 Checkout Code Repository
         uses: actions/checkout@v4
@@ -22,17 +16,14 @@ jobs:
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: 📦 Install Dependencies
         run: npm install
 
       - name: 🛠️ Build Library
         run: npm run build-lib
-
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 🔍 Ensure jq is installed
         run: sudo apt-get install -y jq
@@ -52,10 +43,12 @@ jobs:
         run: |
           cd dist/quml-library
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
-            npm publish --tag beta --access public
+            npm publish --tag=beta --access public
           else
             npm publish --access public
           fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 📜 Log Version Exists
         if: env.status == '200'
