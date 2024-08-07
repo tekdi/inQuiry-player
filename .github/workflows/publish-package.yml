@@ -49,9 +49,9 @@ jobs:
         run: |
           cd dist/quml-library
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
-            npm publish --tag=beta --access public
+            npm publish tekdi-sunbird-quml-player --tag=beta --access public
           else
-            npm publish --access public
+            npm publish tekdi-sunbird-quml-player --access public
           fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
