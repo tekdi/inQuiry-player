@@ -13,7 +13,7 @@ jobs:
       contents: read
       packages: write
       id-token: write
-      pull-request: write
+      pull-requests: write
 
     steps:
       - name: 📥 Checkout Code Repository
