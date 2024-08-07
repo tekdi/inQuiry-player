@@ -17,6 +17,9 @@
     "lodash-es": "^4.17.21",
     "@project-sunbird/client-services": "5.1.2"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@project-sunbird/sunbird-player-sdk-v9": "6.0.5"
   },
