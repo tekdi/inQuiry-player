@@ -8,7 +8,6 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-
     steps:
       - name: 📥 Checkout Code Repository
         uses: actions/checkout@v4
@@ -40,19 +39,15 @@ jobs:
 
       - name: 🚢 Publish to NPM
         if: env.status != '200'
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          registry-url: 'https://registry.npmjs.org'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           cd dist/quml-library
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
-            npm publish --tag beta
+            npm publish --tag beta --access public
           else
-            npm publish
+            npm publish --access public
           fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 📜 Log Version Exists
         if: env.status == '200'
