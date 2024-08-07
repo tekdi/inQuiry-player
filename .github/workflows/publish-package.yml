@@ -21,7 +21,6 @@ jobs:
         with:
           node-version: 18
           registry-url: 'https://registry.npmjs.org'
-          scope: "@tekdi"
 
       - name: 📦 Install Dependencies
         run: npm install
@@ -46,13 +45,12 @@ jobs:
         if: env.status != '200'
         run: |
           cd dist/quml-library
+          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
             npm publish --tag=beta --access public
           else
             npm publish --access public
           fi
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 📜 Log Version Exists
         if: env.status == '200'
