@@ -18,7 +18,7 @@ jobs:
       - name: 📥 Checkout Code Repository
         uses: actions/checkout@v4
 
-      - name: 🔧 Setup Node.js
+      - name: 🔧 Set-up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
