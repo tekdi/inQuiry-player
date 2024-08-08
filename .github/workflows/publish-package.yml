@@ -20,6 +20,7 @@ jobs:
       repository-projects: write
       security-events: write
       statuses: write
+
     steps:
       - name: 📥 Checkout Code Repository
         uses: actions/checkout@v4
@@ -60,9 +61,9 @@ jobs:
         run: |
           cd dist/quml-library
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
-            npm publish --tag=beta
+            npm publish --registry https://registry.npmjs.org --tag=beta --provenance --access public
           else
-            npm publish
+            npm publish --registry https://registry.npmjs.org --provenance --access public
           fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
