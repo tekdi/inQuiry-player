@@ -60,9 +60,9 @@ jobs:
         run: |
           cd dist/quml-library
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
-            npm publish --tag=beta --provenance --access public
+            npm publish --tag=beta
           else
-            npm publish --provenance --access public
+            npm publish
           fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
