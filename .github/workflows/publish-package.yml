@@ -2,24 +2,20 @@ name: 🚀 Publish NPM Package
 
 on:
   pull_request:
+    types: [closed]
     branches:
       - '**'
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true # Check if the PR was merged
     permissions:
       contents: write
       id-token: write
       actions: write
       packages: write
-      deployments: write
-      discussions: write
-      issues: write
       pull-requests: write
-      repository-projects: write
-      security-events: write
-      statuses: write
 
     steps:
       - name: 📥 Checkout Code Repository
