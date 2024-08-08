@@ -9,9 +9,17 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       id-token: write
+      actions: write
       packages: write
+      deployments: write
+      discussions: write
+      issues: write
+      pull-requests: write
+      repository-projects: write
+      security-events: write
+      statuses: write
     steps:
       - name: 📥 Checkout Code Repository
         uses: actions/checkout@v4
