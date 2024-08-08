@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: 📥 Checkout Code Repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
@@ -20,9 +22,8 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@tekdi'
 
-      - name: Debug GitHub Secrets
+      - name: Debug NPM Token Secret
         run: |
-          echo "GITHUB_TOKEN is set"
           echo "NPM_TOKEN value is: '${{ secrets.NPM_TOKEN }}'"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
