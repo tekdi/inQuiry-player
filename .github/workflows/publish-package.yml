@@ -26,8 +26,9 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # - name: Authenticate to npm
-      #   run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Authenticate to npm
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: 📦 Install Dependencies
         run: npm install
@@ -51,6 +52,7 @@ jobs:
       - name: 🚢 Publish to NPM
         if: env.status != '200'
         run: |
+          cd dist/quml-library
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
             npm publish --tag=beta --provenance --access public
           else
