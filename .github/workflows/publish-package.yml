@@ -20,8 +20,9 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@tekdi'
 
-      - name: Debug NPM Token Secret
+      - name: Debug GitHub Secrets
         run: |
+          echo "GITHUB_TOKEN is set"
           echo "NPM_TOKEN value is: '${{ secrets.NPM_TOKEN }}'"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -29,6 +30,7 @@ jobs:
       - name: Authenticate to npm
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          cat ~/.npmrc
 
       - name: 📦 Install Dependencies
         run: npm install
