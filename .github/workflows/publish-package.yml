@@ -1,9 +1,9 @@
 name: 🚀 Publish NPM Package
 
 on:
-pull_request:
-    branches:
-      - '**'
+  pull_request:
+      branches:
+        - '**'
 
 jobs:
   publish:
