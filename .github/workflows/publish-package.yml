@@ -1,5 +1,6 @@
 name: 🚀 Publish NPM Package
 
+on:
 pull_request:
     branches:
       - '**'
