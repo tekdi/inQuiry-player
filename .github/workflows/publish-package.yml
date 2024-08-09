@@ -23,20 +23,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: 📦 Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: 🛠️ Build Library
         run: npm run build-lib
 
       - name: 🔍 Ensure jq is installed
         run: sudo apt-get install -y jq
-
-      # - name: 🗂️ Change Directory to dist/quml-library
-      #   run: |
-      #     cd dist/quml-library
-      #     pwd  # Print the current directory
 
       - name: 🔍 Check if Version Exists
         id: check-version
@@ -53,18 +49,21 @@ jobs:
           echo "status=$STATUS" >> $GITHUB_ENV
 
       - name: 🚢 Publish to NPM
+        echo env.status
         if: env.status != '200'
         run: |
           cd dist/quml-library
           pwd  # Print the current directory
-          ls
           npm pack
+          echo "-----------------------------------Package is packed---------------------------------------------"
+          echo "-----------------------------------Contents inside directory-------------------------------------"
           ls
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
-            echo "//registry.npmjs.org/:_authToken='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'" > ~/.npmrc
-            npm publish tekdi-sunbird-quml-player-* --tag=beta --access public
+            echo "--- NPM Auth Check---"
+            npm whoami
+            echo "---Publish the package---"
+            npm publish tekdi-sunbird-quml-player-* --tag=beta
           else
-            echo "//registry.npmjs.org/:_authToken='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'" > ~/.npmrc
             npm publish tekdi-sunbird-quml-player-* --access public
           fi
         env:
