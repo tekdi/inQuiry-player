@@ -23,10 +23,8 @@ jobs:
       - name: Verify creds1
         run: |
           echo "hello world"
-          echo ${{ vars.REPO_TESTVAR }}
           echo ${{ vars.TESTVAR }}
           echo ${{ vars.NPM_TOKEN }}
-          # echo ${{ secrets.NPM_TOKEN }}
 
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
@@ -56,7 +54,6 @@ jobs:
       - name: 🚢 Publish to NPM
         if: env.status != '200'
         run: |
-          npm whoami
           cd dist/quml-library
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
             npm publish --tag=beta --access public
