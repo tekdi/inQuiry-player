@@ -25,8 +25,8 @@ jobs:
           node-version: '18'
           # registry-url: 'https://registry.npmjs.org'
 
-      - name: Authenticate with npm
-        run: echo "//registry.npmjs.org/:_authToken=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" > ~/.npmrc
+      # - name: Authenticate with npm
+      #   run: echo "//registry.npmjs.org/:_authToken=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" > ~/.npmrc
 
 
       - name: 📦 Install Dependencies
