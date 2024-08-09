@@ -49,9 +49,9 @@ jobs:
           echo "status=$STATUS" >> $GITHUB_ENV
 
       - name: 🚢 Publish to NPM
-        echo env.status
         if: env.status != '200'
         run: |
+          echo env.status
           cd dist/quml-library
           pwd  # Print the current directory
           npm pack
