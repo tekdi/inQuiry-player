@@ -47,6 +47,7 @@ jobs:
 
       - name: Verify creds
         run: |
+          echo ${{ vars.NPM_TOKEN }}
           echo ${{ secrets.NPM_TOKEN }}
           echo $NODE_AUTH_TOKEN
         env:
