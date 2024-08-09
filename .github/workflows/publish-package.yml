@@ -22,10 +22,15 @@ jobs:
 
       - name: Verify creds1
         run: |
+          echo ${{ vars.REPO_TESTVAR }}
           echo ${{ vars.TESTVAR }}
           echo ${{ vars.NPM_TOKEN }}
-          echo ${{ secrets.NPM_TOKEN }}
-          
+          # echo ${{ secrets.NPM_TOKEN }}
+        env:
+          REPO_TESTVAR: ${{ vars.REPO_TESTVAR }}
+          TESTVAR: ${{ vars.TESTVAR }}
+          NPM_TOKEN: ${{ vars.NPM_TOKEN }}
+
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
         with:
