@@ -63,8 +63,6 @@ jobs:
           echo "-----------------------------------Contents inside directory-------------------------------------"
           ls
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
-            echo "--- NPM Auth Check---"
-            npm whoami
             echo "---Publish the package---"
             npm publish tekdi-sunbird-quml-player-* --tag=beta
           else
