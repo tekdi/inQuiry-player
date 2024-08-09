@@ -42,8 +42,11 @@ jobs:
       - name: 🔍 Check if Version Exists
         id: check-version
         run: |
+          ls
           PACKAGE_NAME=$(jq -r .name package.json)
+          echo "Package Name: $(jq -r .name package.json)"
           PACKAGE_VERSION=$(jq -r .version package.json)
+          echo "Package Version: $(jq -r .version package.json)"
           NPM_REGISTRY="https://registry.npmjs.org"
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$NPM_REGISTRY/$PACKAGE_NAME/$PACKAGE_VERSION")
           echo "status=$STATUS" >> $GITHUB_ENV
