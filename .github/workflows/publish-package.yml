@@ -26,7 +26,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          registry-url: 'https://registry.npmjs.org'
+          # registry-url: 'https://registry.npmjs.org'
 
       - name: List files
         run: ls -la ~/
@@ -54,5 +54,5 @@ jobs:
           npm pack
           echo "-----------------------------------Package is packed---------------------------------------------"
           npm publish tekdi-sunbird-quml-player-*.tgz --tag=beta --access public
-        env:
-          NODE_AUTH_TOKEN: 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
+        # env:
+        #   NODE_AUTH_TOKEN: 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
