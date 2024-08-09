@@ -34,14 +34,16 @@ jobs:
       - name: 🔍 Ensure jq is installed
         run: sudo apt-get install -y jq
 
-      - name: 🗂️ Change Directory to dist/quml-library
-        run: |
-          cd dist/quml-library
-          pwd  # Print the current directory
+      # - name: 🗂️ Change Directory to dist/quml-library
+      #   run: |
+      #     cd dist/quml-library
+      #     pwd  # Print the current directory
 
       - name: 🔍 Check if Version Exists
         id: check-version
         run: |
+          cd dist/quml-library
+          pwd  # Print the current directory
           ls
           PACKAGE_NAME=$(jq -r .name package.json)
           echo "Package Name: $(jq -r .name package.json)"
@@ -54,6 +56,9 @@ jobs:
       - name: 🚢 Publish to NPM
         if: env.status != '200'
         run: |
+          cd dist/quml-library
+          pwd  # Print the current directory
+          ls
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
             npm publish --tag=beta --access public
           else
