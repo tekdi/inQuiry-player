@@ -34,6 +34,11 @@ jobs:
       - name: 🔍 Ensure jq is installed
         run: sudo apt-get install -y jq
 
+      - name: 🔍 Check Package Access
+        run: npm info @tekdi/sunbird-quml-player || echo "Package not found, will attempt to publish."
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: 🔍 Check if Version Exists
         id: check-version
         run: |
@@ -54,7 +59,7 @@ jobs:
             npm publish --access public
           fi
         env:
-          NODE_AUTH_TOKEN: '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'
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 📜 Log Version Exists
         if: env.status == '200'
