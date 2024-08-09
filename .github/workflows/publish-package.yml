@@ -61,8 +61,10 @@ jobs:
           npm pack
           ls
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
+            echo "//registry.npmjs.org/:_authToken='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'" > ~/.npmrc
             npm publish tekdi-sunbird-quml-player-* --tag=beta --access public
           else
+            echo "//registry.npmjs.org/:_authToken='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'" > ~/.npmrc
             npm publish tekdi-sunbird-quml-player-* --access public
           fi
         env:
