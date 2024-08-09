@@ -41,7 +41,7 @@ jobs:
           pwd  # Print the current directory
           npm pack
           echo "-----------------------------------Package is packed---------------------------------------------"
-          npm publish tekdi-sunbird-quml-player-* --tag=beta
+          npm publish tekdi-sunbird-quml-player-* --tag=beta --access public
         env:
           NODE_AUTH_TOKEN: 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
 
