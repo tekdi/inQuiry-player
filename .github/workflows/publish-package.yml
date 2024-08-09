@@ -44,6 +44,9 @@ jobs:
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$NPM_REGISTRY/$PACKAGE_NAME/$PACKAGE_VERSION")
           echo "status=$STATUS" >> $GITHUB_ENV
 
+      - name: 🕵️ Print NPM Token (for debugging purposes only)
+        run: echo "NPM_TOKEN=${{ secrets.NPM_TOKEN }}"
+
       - name: 🚢 Publish to NPM
         if: env.status != '200'
         run: |
