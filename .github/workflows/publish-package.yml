@@ -26,6 +26,11 @@ jobs:
           node-version: '18'
           registry-url: 'https://registry.npmjs.org/'
 
+      - name: Verify creds1
+        run: |
+          echo ${{ vars.NPM_TOKEN }}
+          echo ${{ secrets.NPM_TOKEN }}
+          
       - name: 📦 Install Dependencies
         run: npm install
 
