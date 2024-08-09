@@ -47,7 +47,7 @@ jobs:
       - name: 🚢 Publish to NPM
         if: env.status != '200'
         run: |
-          npm pack ./dist/quml-library
+          npm pack
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
             npm publish tekdi-sunbird-quml-player-* --tag beta --access public
           else
