@@ -70,8 +70,8 @@ jobs:
           else
             npm publish tekdi-sunbird-quml-player-* --access public
           fi
-        # env:
-        #   NODE_AUTH_TOKEN: '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'
+        env:
+          NODE_AUTH_TOKEN: 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
 
       - name: 📜 Log Version Exists
         if: env.status == '200'
