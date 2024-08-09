@@ -35,42 +35,52 @@ jobs:
       - name: 🛠️ Build Library
         run: npm run build-lib
 
-      - name: 🔍 Ensure jq is installed
-        run: sudo apt-get install -y jq
-
-      - name: 🔍 Check if Version Exists
-        id: check-version
-        run: |
-          cd dist/quml-library
-          pwd  # Print the current directory
-          ls
-          PACKAGE_NAME=$(jq -r .name package.json)
-          echo "Package Name: $(jq -r .name package.json)"
-          PACKAGE_VERSION=$(jq -r .version package.json)
-          echo "Package Version: $(jq -r .version package.json)"
-          NPM_REGISTRY="https://registry.npmjs.org"
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$NPM_REGISTRY/$PACKAGE_NAME/$PACKAGE_VERSION")
-          echo "status=$STATUS" >> $GITHUB_ENV
-
       - name: 🚢 Publish to NPM
-        if: env.status != '200'
         run: |
-          echo env.status
           cd dist/quml-library
           pwd  # Print the current directory
           npm pack
           echo "-----------------------------------Package is packed---------------------------------------------"
-          echo "-----------------------------------Contents inside directory-------------------------------------"
-          ls
-          if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
-            echo "---Publish the package---"
-            npm publish tekdi-sunbird-quml-player-* --tag=beta
-          else
-            npm publish tekdi-sunbird-quml-player-* --access public
-          fi
+          npm publish tekdi-sunbird-quml-player-* --tag=beta
         env:
           NODE_AUTH_TOKEN: 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
 
-      - name: 📜 Log Version Exists
-        if: env.status == '200'
-        run: echo "Version already exists, skipping publish."
+      # - name: 🔍 Ensure jq is installed
+      #   run: sudo apt-get install -y jq
+
+      # - name: 🔍 Check if Version Exists
+      #   id: check-version
+      #   run: |
+      #     cd dist/quml-library
+      #     pwd  # Print the current directory
+      #     ls
+      #     PACKAGE_NAME=$(jq -r .name package.json)
+      #     echo "Package Name: $(jq -r .name package.json)"
+      #     PACKAGE_VERSION=$(jq -r .version package.json)
+      #     echo "Package Version: $(jq -r .version package.json)"
+      #     NPM_REGISTRY="https://registry.npmjs.org"
+      #     STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$NPM_REGISTRY/$PACKAGE_NAME/$PACKAGE_VERSION")
+      #     echo "status=$STATUS" >> $GITHUB_ENV
+
+      # - name: 🚢 Publish to NPM
+      #   if: env.status != '200'
+      #   run: |
+      #     echo env.status
+      #     cd dist/quml-library
+      #     pwd  # Print the current directory
+      #     npm pack
+      #     echo "-----------------------------------Package is packed---------------------------------------------"
+      #     echo "-----------------------------------Contents inside directory-------------------------------------"
+      #     ls
+      #     if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
+      #       echo "---Publish the package---"
+      #       npm publish tekdi-sunbird-quml-player-* --tag=beta
+      #     else
+      #       npm publish tekdi-sunbird-quml-player-* --access public
+      #     fi
+      #   env:
+      #     NODE_AUTH_TOKEN: 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
+
+      # - name: 📜 Log Version Exists
+      #   if: env.status == '200'
+      #   run: echo "Version already exists, skipping publish."
