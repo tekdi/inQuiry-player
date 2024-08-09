@@ -7,13 +7,14 @@ on:
 
 jobs:
   publish:
+    environment: NPM_REGISTRY
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      id-token: write
-      actions: write
-      packages: write
-      pull-requests: write
+    # permissions:
+    #   contents: write
+    #   id-token: write
+    #   actions: write
+    #   packages: write
+    #   pull-requests: write
 
     steps:
       - name: 📥 Checkout Code Repository
@@ -44,8 +45,12 @@ jobs:
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$NPM_REGISTRY/$PACKAGE_NAME/$PACKAGE_VERSION")
           echo "status=$STATUS" >> $GITHUB_ENV
 
-      - name: 🕵️ Print NPM Token (for debugging purposes only)
-        run: echo "NPM_TOKEN=${{ secrets.NPM_TOKEN }}"
+      - name: Verify creds
+        run: |
+          echo ${{ secrets.NPM_TOKEN }}
+          echo $NODE_AUTH_TOKEN
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 🚢 Publish to NPM
         if: env.status != '200'
