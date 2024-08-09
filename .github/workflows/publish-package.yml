@@ -10,7 +10,7 @@ jobs:
     environment: NPM_REGISTRY
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       id-token: write
       actions: write
       packages: write
@@ -20,11 +20,11 @@ jobs:
       - name: 📥 Checkout Code Repository
         uses: actions/checkout@v4
 
-      - name: Verify creds1
-        run: |
-          echo "hello world"
-          echo ${{ vars.TESTVAR }}
-          echo ${{ vars.NPM_TOKEN }}
+      # - name: Verify creds1
+      #   run: |
+      #     echo "hello world"
+      #     echo ${{ vars.TESTVAR }}
+      #     echo ${{ vars.NPM_TOKEN }}
 
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
@@ -39,31 +39,39 @@ jobs:
       - name: 🛠️ Build Library
         run: npm run build-lib
 
-      - name: 🔍 Ensure jq is installed
-        run: sudo apt-get install -y jq
-
-      - name: 🔍 Check if Version Exists
-        id: check-version
-        run: |
-          cd dist/quml-library
-          PACKAGE_NAME=$(jq -r .name package.json)
-          PACKAGE_VERSION=$(jq -r .version package.json)
-          NPM_REGISTRY="https://registry.npmjs.org"
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$NPM_REGISTRY/$PACKAGE_NAME/$PACKAGE_VERSION")
-          echo "status=$STATUS" >> $GITHUB_ENV
-
       - name: 🚢 Publish to NPM
-        if: env.status != '200'
         run: |
           cd dist/quml-library
-          if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
-            npm publish --tag=beta --access public
-          else
-            npm publish --access public
-          fi
+          npm publish --tag=beta --access public
         env:
           NODE_AUTH_TOKEN: "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"
 
-      - name: 📜 Log Version Exists
-        if: env.status == '200'
-        run: echo "Version already exists, skipping publish."
+
+      # - name: 🔍 Ensure jq is installed
+      #   run: sudo apt-get install -y jq
+
+      # - name: 🔍 Check if Version Exists
+      #   id: check-version
+      #   run: |
+      #     cd dist/quml-library
+      #     PACKAGE_NAME=$(jq -r .name package.json)
+      #     PACKAGE_VERSION=$(jq -r .version package.json)
+      #     NPM_REGISTRY="https://registry.npmjs.org"
+      #     STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$NPM_REGISTRY/$PACKAGE_NAME/$PACKAGE_VERSION")
+      #     echo "status=$STATUS" >> $GITHUB_ENV
+
+      # - name: 🚢 Publish to NPM
+      #   if: env.status != '200'
+      #   run: |
+      #     cd dist/quml-library
+      #     if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
+      #       npm publish --tag=beta --access public
+      #     else
+      #       npm publish --access public
+      #     fi
+      #   env:
+      #     NODE_AUTH_TOKEN: "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"
+
+      # - name: 📜 Log Version Exists
+      #   if: env.status == '200'
+      #   run: echo "Version already exists, skipping publish."
