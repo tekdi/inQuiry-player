@@ -55,6 +55,7 @@ jobs:
       - name: 🚢 Publish to NPM
         if: env.status != '200'
         run: |
+          npm whoami
           cd dist/quml-library
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
             npm publish --tag=beta --access public
