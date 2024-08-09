@@ -53,14 +53,6 @@ jobs:
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$NPM_REGISTRY/$PACKAGE_NAME/$PACKAGE_VERSION")
           echo "status=$STATUS" >> $GITHUB_ENV
 
-      - name: Verify creds
-        run: |
-          echo ${{ vars.NPM_TOKEN }}
-          echo ${{ secrets.NPM_TOKEN }}
-          echo $NODE_AUTH_TOKEN
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: 🚢 Publish to NPM
         if: env.status != '200'
         run: |
@@ -72,7 +64,8 @@ jobs:
             npm publish --access public
           fi
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: "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"
 
       - name: 📜 Log Version Exists
         if: env.status == '200'
