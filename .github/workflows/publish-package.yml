@@ -45,7 +45,8 @@ jobs:
           echo "status=$STATUS" >> $GITHUB_ENV
 
       - name: Verify creds
-        run: echo "Test creds" >> ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "Test creds" >> $NODE_AUTH_TOKEN
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
