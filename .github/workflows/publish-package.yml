@@ -65,7 +65,7 @@ jobs:
           fi
         env:
           # NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: "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"
+          NODE_AUTH_TOKEN: "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"
 
       - name: 📜 Log Version Exists
         if: env.status == '200'
