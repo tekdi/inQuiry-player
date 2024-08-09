@@ -34,10 +34,14 @@ jobs:
       - name: 🔍 Ensure jq is installed
         run: sudo apt-get install -y jq
 
+      - name: 🗂️ Change Directory to dist/quml-library
+        run: |
+          cd dist/quml-library
+          pwd  # Print the current directory
+
       - name: 🔍 Check if Version Exists
         id: check-version
         run: |
-          cd dist/quml-library
           PACKAGE_NAME=$(jq -r .name package.json)
           PACKAGE_VERSION=$(jq -r .version package.json)
           NPM_REGISTRY="https://registry.npmjs.org"
@@ -47,11 +51,10 @@ jobs:
       - name: 🚢 Publish to NPM
         if: env.status != '200'
         run: |
-          npm pack
           if [[ "$(jq -r .version package.json)" == *"beta"* ]]; then
-            npm publish tekdi-sunbird-quml-player-* --tag beta --access public
+            npm publish --tag=beta --access public
           else
-            npm publish tekdi-sunbird-quml-player-* --access public
+            npm publish --access public
           fi
         env:
           NODE_AUTH_TOKEN: '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'
