@@ -1,6 +1,6 @@
 {
   "name": "@tekdi/sunbird-quml-player",
-  "version": "9.0.0-beta.8",
+  "version": "9.0.0-beta.9",
   "schematics": "./schematics/collection.json",
   "ng-add": {
     "save": "dependencies"
