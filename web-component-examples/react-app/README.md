@@ -53,8 +53,8 @@ import { useEffect, useRef } from "react";
 import "./App.css";
 
 + import $ from "jquery";
-+ import "/styles.css";
-+ import "/sunbird-quml-player.js";
++ import "@tekdi/sunbird-quml-player-web-component/styles.css";
++ import "@tekdi/sunbird-quml-player-web-component/sunbird-quml-player.js";
 
 
 function App() {
@@ -78,8 +78,8 @@ import { useEffect, useRef } from "react";
 import "./App.css";
 
 import $ from "jquery";
-import "/styles.css";
-import "/sunbird-quml-player.js";
+import "@tekdi/sunbird-quml-player-web-component/styles.css";
+import "@tekdi/sunbird-quml-player-web-component/sunbird-quml-player.js";
 
 
 function App() {
@@ -105,8 +105,8 @@ import { useEffect, useRef } from "react";
 import "./App.css";
 
 import $ from "jquery";
-import "/styles.css";
-import "/sunbird-quml-player.js";
+import "@tekdi/sunbird-quml-player-web-component/styles.css";
+import "@tekdi/sunbird-quml-player-web-component/sunbird-quml-player.js";
 
 + import { playerConfig } from "./data";
 
@@ -140,8 +140,8 @@ Import `useRef` hook and create player reference for output events from QuML pla
 import "./App.css";
 
 import $ from "jquery";
-import "/styles.css";
-import "/sunbird-quml-player.js";
+import "@tekdi/sunbird-quml-player-web-component/styles.css";
+import "@tekdi/sunbird-quml-player-web-component/sunbird-quml-player.js";
 
 import { playerConfig } from "./data";
 
