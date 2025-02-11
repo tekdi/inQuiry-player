@@ -32,13 +32,19 @@ import { DurationtimerComponent } from './icon/durationtimer/durationtimer.compo
 import { AudioComponent } from './icon/audio/audio.component';
 import { WrongComponent } from './icon/wrong/wrong.component';
 import { MenuComponent } from './icon/menu/menu.component';
-import { SunbirdPlayerSdkModule } from '@project-sunbird/sunbird-player-sdk-v9';
+import { SunbirdPlayerSdkModule, PLAYER_CONFIG } from '@project-sunbird/sunbird-player-sdk-v9';
 import { QumlLibraryService } from './quml-library.service';
 import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
 import { MainPlayerComponent } from './main-player/main-player.component';
 import { SectionPlayerComponent } from './section-player/section-player.component';
-import { ProgressIndicatorsComponent } from './progress-indicators/progress-indicators.component'
-
+import { ProgressIndicatorsComponent } from './progress-indicators/progress-indicators.component';
+import { MtfComponent } from './mtf/mtf.component';
+import { MtfOptionsComponent } from './mtf/mtf-options/mtf-options.component';
+import { DragDropModule } from "@angular/cdk/drag-drop"
+import { CheckFigureDirective } from './mtf/check-figure.directive';
+import { AsqComponent } from './asq/asq.component';
+import { AsqOptionsComponent } from './asq/asq-options/asq-options.component';
+import { ReorderComponent } from './icon/reorder/reorder.component';
 @NgModule({
   declarations: [
     QumlLibraryComponent,
@@ -76,14 +82,22 @@ import { ProgressIndicatorsComponent } from './progress-indicators/progress-indi
     MainPlayerComponent,
     SectionPlayerComponent,
     ProgressIndicatorsComponent,
+    MtfComponent,
+    MtfOptionsComponent,
+    CheckFigureDirective,
+    AsqComponent,
+    AsqOptionsComponent,
+    ReorderComponent
   ],
   imports: [
     CommonModule,
     CarouselModule,
-    SunbirdPlayerSdkModule
+    SunbirdPlayerSdkModule,
+    DragDropModule
   ],
   providers: [
-    QumlLibraryService
+    QumlLibraryService,
+    { provide: PLAYER_CONFIG, useValue: { contentCompatibilityLevel: 6 } }
   ],
   exports: [MainPlayerComponent]
 })

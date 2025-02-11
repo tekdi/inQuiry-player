@@ -1,6 +1,6 @@
 {
-  "name": "@project-sunbird/sunbird-quml-player",
-  "version": "7.0.4",
+  "name": "@tekdi/sunbird-quml-player",
+  "version": "9.0.0-beta.9",
   "schematics": "./schematics/collection.json",
   "ng-add": {
     "save": "dependencies"
@@ -10,21 +10,21 @@
     "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/quml-library/"
   },
   "peerDependencies": {
-    "@angular/common": "^15.2.4",
-    "@angular/core": "^15.2.4",
-    "katex": "^0.11.1",
-    "ngx-bootstrap": "^10.0.0",
+    "@angular/common": "^16.2.12",
+    "@angular/core": "^16.2.12",
+    "katex": "^0.16.10",
+    "ngx-bootstrap": "^11.0.0",
     "lodash-es": "^4.17.21",
-    "@project-sunbird/client-services": "4.9.1"
+    "@project-sunbird/client-services": "5.1.2"
   },
   "dependencies": {
-    "@project-sunbird/sunbird-player-sdk-v9": "5.1.0"
+    "@project-sunbird/sunbird-player-sdk-v9": "6.0.5"
   },
   "devDependencies": {
     "copyfiles": "2.4.1",
     "typescript": "~4.9.5"
   },
-  "homepage": "https://github.com/Sunbird-inQuiry/player#readme",
+  "homepage": "https://github.com/tekdi/inQuiry-player#readme",
   "keywords": [
     "sunbird",
     "sunbird QuML player",
@@ -32,7 +32,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Sunbird-inQuiry/player.git"
+    "url": "https://github.com/tekdi/inQuiry-player.git"
   },
   "license": "MIT"
 }
