@@ -13,9 +13,16 @@ const build = async () => {
 
   await fs.ensureDir("dist/quml-player-wc");
   await fs.ensureDir("web-component");
+  await fs.ensureDir("web-component-examples");
   await concat(files, "web-component/sunbird-quml-player.js");
+  await concat(files, "web-component-examples/vanilla-js/sunbird-quml-player.js");
+  
   await fs.copy("./dist/quml-player-wc/assets", "web-component/assets");
+  await fs.copy("./dist/quml-player-wc/assets", "web-component-examples/vanilla-js/assets");
+
   await fs.copy("./dist/quml-player-wc/styles.css", "web-component/styles.css");
+  await fs.copy("./dist/quml-player-wc/styles.css", "web-component-examples/vanilla-js/styles.css");
+
   await fs.copy("README.md", "web-component/README.md")
 
   const filesNames = fs.readdirSync("dist/quml-player-wc");

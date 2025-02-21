@@ -45,7 +45,9 @@ import { ProgressIndicatorsComponent } from '../../../quml-library/src/lib/progr
 import { MtfComponent } from '../../../quml-library/src/lib/mtf/mtf.component';
 import { MtfOptionsComponent } from '../../../quml-library/src/lib/mtf/mtf-options/mtf-options.component';
 import { DragDropModule } from "@angular/cdk/drag-drop"
-import { CheckFigureDirective } from '../../../quml-library/src/lib/mtf/check-figure.directive'
+import { CheckFigureDirective } from '../../../quml-library/src/lib/mtf/check-figure.directive';
+import { AsqComponent } from '../../../quml-library/src/lib/asq/asq.component';
+import { AsqOptionsComponent } from '../../../quml-library/src/lib/asq/asq-options/asq-options.component';
 @NgModule({
     declarations: [
         MainPlayerComponent,
@@ -85,7 +87,9 @@ import { CheckFigureDirective } from '../../../quml-library/src/lib/mtf/check-fi
         ProgressIndicatorsComponent,
         MtfComponent,
         MtfOptionsComponent,
-        CheckFigureDirective
+        CheckFigureDirective,
+        AsqComponent,
+        AsqOptionsComponent
     ],
     imports: [
         BrowserModule,
