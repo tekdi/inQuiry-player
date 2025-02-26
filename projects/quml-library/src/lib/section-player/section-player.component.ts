@@ -427,9 +427,10 @@ export class SectionPlayerComponent implements OnChanges, AfterViewInit {
   }
 
   previousSlideClicked(event) {
-    /* istanbul ignore else */
     if (event.event === 'previous clicked') {
-      if ((this.optionSelectedObj || this.mtfReorderedOptionsMap) && this.showFeedBack) {
+      let shouldValidate = (this.optionSelectedObj || this.mtfReorderedOptionsMap) && this.showFeedBack;
+      let shouldValidateAgain = (this.optionSelectedObj || this.asqReorderedOptionsMap) && this.showFeedBack;
+      if (shouldValidate || shouldValidateAgain) {
         this.stopAutoNavigation = false;
         this.validateQuestionInteraction('previous');
       } else {
@@ -439,21 +440,8 @@ export class SectionPlayerComponent implements OnChanges, AfterViewInit {
           this.jumpToSection(previousSectionId);
           return;
         }
-        this.prevSlide();
+        this.prevSlide(); // Called only once on previousSlideClicked
       }
-      if ((this.optionSelectedObj || this.asqReorderedOptionsMap) && this.showFeedBack) {
-        this.stopAutoNavigation = false;
-        this.validateQuestionInteraction('previous');
-      } else {
-        this.stopAutoNavigation = true;
-        if (this.currentSlideIndex === 0 && this.parentConfig.isSectionsAvailable && this.getCurrentSectionIndex() > 0) {
-          const previousSectionId = this.mainProgressBar[this.getCurrentSectionIndex() - 1].identifier;
-          this.jumpToSection(previousSectionId);
-          return;
-        }
-        this.prevSlide();
-      }
-
     }
   }
 
