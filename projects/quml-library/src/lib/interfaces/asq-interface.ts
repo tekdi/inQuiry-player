@@ -1,5 +1,7 @@
+import { SafeHtml } from "@angular/platform-browser";
+
 export interface AsqOptions {
-    label: string;
+    label: string | SafeHtml;
     value: number;
 }
 
