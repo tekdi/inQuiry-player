@@ -194,6 +194,8 @@ p {
   border-right: 1px solid black;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
+  min-height: 60px;
+  max-height: 80px;
 }
 
 .right-box {
@@ -202,6 +204,8 @@ p {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
   cursor: grab;
+  min-height: 60px;
+    max-height: 80px;
 }
 
 .left-box1 {
@@ -271,6 +275,16 @@ p {
       padding: 8px;
     }
 }
+::ng-deep .match-box figure {
+  position: relative;
+}
+
+::ng-deep .match-box figure img {
+  width: 70px;
+    height: 50px;
+  object-fit: cover;
+}
+
 
 
 

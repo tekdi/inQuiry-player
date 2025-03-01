@@ -88,12 +88,12 @@ align-items: center;
 justify-content: center;
 height: 100vh;
 }
-.drag-handle{
-  position: absolute;
-  top: 15px;
-  right: 5px;
-  cursor: move;
-}
+// .drag-handle{
+//   position: absolute;
+//   top: 15px;
+//   right: 30px;
+//   cursor: move;
+// }
 @media screen and (max-width: 600px) {
 ::ng-deep .asq-vertical-box p {
   line-height: 14px;
@@ -133,7 +133,8 @@ height: 100vh;
   // width: 250px;
   width: 90%;
   cursor: grab;
-  height: 60px;
+  min-height: 60px;
+  max-height: 100px;
   padding: 12px;
   border-left: 5px solid #99bcd8;
     border-right: 1px solid black;
@@ -145,6 +146,7 @@ height: 100vh;
   font-weight: bold;
   // transition: transform 0.2s ease-in-out;
   position: relative;
+  overflow: hidden;
 }
 
 /* Restricting drag to within the box */
@@ -155,7 +157,8 @@ height: 100vh;
 
 /* Prevent dragging outside the box */
 .cdk-drag-preview {
-  max-height: 60px;
+  min-height: 60px;
+    max-height: 100px;
 }
 
 /* List Styles */
@@ -177,11 +180,21 @@ height: 100vh;
 .drag-handle {
   cursor: grab;
   font-size: 18px;
-  padding: 5px;
   display: flex;
   align-items: center;
 }
 
-.mt-1r {
-  padding-top: 1rem !important;
+// .mt-1r {
+//   padding-top: 1rem !important;
+// }
+::ng-deep .img-jk figure img {
+  width: 70px !important;
+  height: 50px !important;
+  object-fit: cover;
+}
+::ng-deep .img-jk p {
+  margin-bottom: 0px !important;
+}
+::ng-deep .img-jk figure {
+  position: relative;
 }

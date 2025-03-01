@@ -2,15 +2,16 @@
   <div id="dragdropSpace" cdkDropList [cdkDropListData]="shuffledOptions" class="vertical-list" (cdkDropListDropped)="onDrop($event)">
     <div class="box vertical-box" *ngFor="let option of shuffledOptions" cdkDrag>
       <div class="content">
-        <div class="mt-1r" [innerHTML]="option.label"></div>
+        <div class="mt-1r img-jk" [innerHTML]="option.label"></div>
       </div>
       <div class="drag-handle" style="display: flex; align-items: center;">
-        <quml-reorder></quml-reorder>
+        <!-- <quml-reorder></quml-reorder> -->
+         <span class="drag-icon">⠿</span>
       </div>
     </div>
   </div>
 </ng-container>
-
+ 
 
 
 <ng-container *ngIf="optionsShuffled && layout === 'HORIZONTAL'">
@@ -20,7 +21,8 @@
         <div class="mt-1r" [innerHTML]="option.label"></div>
       </div>
       <div  class="drag-handle" style="display: flex; align-items: center;">
-        <quml-reorder></quml-reorder>
+        <!-- <quml-reorder></quml-reorder> -->
+         <span class="drag-icon">⠿</span>
       </div>
     </div>
   </div>
