@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MtfInteractions, MtfOptions } from '../interfaces/mtf-interface';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'quml-mtf',
@@ -14,8 +15,10 @@ export class MtfComponent implements OnInit {
   @Output() optionsReordered = new EventEmitter<MtfOptions>();
 
   public interactions?: MtfInteractions;
-  public questionBody?: string;
+  public questionBody?: SafeHtml;
   public layout: 'VERTICAL' | 'HORIZONTAL' | 'DEFAULT';
+
+  constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.initialize();
@@ -23,8 +26,29 @@ export class MtfComponent implements OnInit {
 
   initialize(): void {
     this.setLayout();
-    this.interactions = this.question?.interactions;
-    this.questionBody = this.question?.body;
+
+    // Sanitize the question body
+    this.questionBody = this.sanitizeHtml(this.question?.body);
+    console.log('MTF this.questionBody', this.questionBody);
+
+    // Sanitize interactions if available
+    if (this.question?.interactions) {
+      this.interactions = { ...this.question.interactions };
+
+      if (this.interactions.response1?.options) {
+        this.interactions.response1.options.left = this.interactions.response1.options.left.map(option => ({
+          ...option,
+          label: this.sanitizeHtml(option.label)
+        }));
+
+        this.interactions.response1.options.right = this.interactions.response1.options.right.map(option => ({
+          ...option,
+          label: this.sanitizeHtml(option.label)
+        }));
+      }
+    }
+
+    console.log('MTF this.interactions', this.interactions);
   }
 
   setLayout(): void {
@@ -41,5 +65,10 @@ export class MtfComponent implements OnInit {
 
   handleReorderedOptions(reorderedOptions: MtfOptions) {
     this.optionsReordered.emit(reorderedOptions);
+  }
+
+  // Sanitize HTML content
+  sanitizeHtml(html: any): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 }

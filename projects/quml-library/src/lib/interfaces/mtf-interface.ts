@@ -1,5 +1,7 @@
+import { SafeHtml } from "@angular/platform-browser";
+
 export interface MtfOption {
-    label: string;
+    label: string | SafeHtml;
     value: number;
 }
 
